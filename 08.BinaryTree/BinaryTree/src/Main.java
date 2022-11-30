@@ -2,20 +2,15 @@ public class Main {
     public static void main(String[] args) {
         BinaryTree<String> tree = new BinaryTree<>();
 
-        tree.insert("A", tree.root, true);
+        tree.insert("A",tree.root,true);
+        tree.insert("B",tree.root,true);
+        tree.insert("C",tree.root,false);
+        tree.insert("D",tree.root.left,true);
+        tree.insert("E",tree.root.right,true);
+        tree.insert("F",tree.root.right,false);
+        tree.insert("G",tree.root.right.left,false);
+        tree.postOrderTraversal();
 //        tree.print();
-        tree.insert("B", tree.root, true);
-        tree.insert("C", tree.root, false);
-//        tree.print();
-        tree.insert("D", tree.root.left, true);
-        tree.insert("E", tree.root.left, false);
-        tree.insert("G", tree.root.right, false);
-        tree.print();
-        tree.inOrderTraversal();
-        System.out.println();
-        System.out.println("hasil searching:");
-        System.out.println(tree.searchingInOrderSearch("G").getData());
-        System.out.println(tree.searchingInOrderSearch("B").getData());
     }
 }
 
@@ -82,6 +77,30 @@ class BinaryTree<E>{
         inOrderTraversal(node.left);
         System.out.println(node.data);
         inOrderTraversal(node.right);
+    }
+
+    void preOrderTraversal(){
+        preOrderTraversal(this.root);
+    }
+
+    private void preOrderTraversal(Node node){
+        if(node == null) return;
+
+        System.out.println(node.data);
+        preOrderTraversal(node.left);
+        preOrderTraversal(node.right);
+    }
+
+    void postOrderTraversal(){
+        postOrderTraversal(this.root);
+    }
+
+    private void postOrderTraversal(Node node){
+        if(node == null) return;
+
+        postOrderTraversal(node.left);
+        postOrderTraversal(node.right);
+        System.out.println(node.data);
     }
 
     Node searchingInOrderSearch(E key){
